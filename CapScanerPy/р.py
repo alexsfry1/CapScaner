@@ -1,21 +1,20 @@
-import os
+import glob
 
 def openfile(doc):
-    with open (doc , 'r', encoding='utf-16') as file:
-        for i in file:
-            if "Заглушка" in i:
-                print("Заглушка" + " " + i + " " + doc)
+    try:
+        with open (doc , 'r', encoding='utf-16') as file:
+         for i in file:
+                if "Заглушка" in i:
+                    print("Заглушка" + " " + i + " " + doc)
+    except:
+        UnicodeError
 
 
 def foldersearch(folder):
-    fold = os.listdir(folder)
+    fold = glob.iglob(str.format(folder + '\**\*.txt'), recursive=True)
     for string in fold:
-         path = str(folder + '/' + string)
-         if(os.path.isdir(path)):
-            foldersearch(path)
-         elif(('txt' in path) and ('xdb' not in path) and ('Tests' not in path)):
-             openfile(path)
-
+        if("Test" not in string):
+            openfile(string)
 
 a = input()
 foldersearch(a)
