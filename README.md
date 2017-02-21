@@ -1,0 +1,2 @@
+# CapScaner
+Recusiv folder scaner
